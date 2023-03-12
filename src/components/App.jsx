@@ -14,14 +14,16 @@ export class App extends Component {
   handleSubmit = e => {
     e.preventDefault()
     const userId = nanoid()
-    this.state.contacts.push({ id: userId, name: this.state.name });
-    this.setState({ [e.target.name.name]: "" });
-    // this.setState({ [e.target.number.name]: "" });
+    this.state.contacts.push({ id: userId, name: this.state.name, number: this.state.number });
+    console.log(this.state);
+    e.currentTarget.reset();
+    // this.setState({ [e.target.name.name]: "" });
   }
   handleInput = e => {
-    this.setState(prevState => {
-      return { [e.target.name]: e.target.value }
-    })
+    console.log({ [e.target.name]: e.target.value });
+    this.setState(
+      { [e.target.name]: e.target.value }
+    )
   }
   render() {
     return (

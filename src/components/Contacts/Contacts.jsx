@@ -1,6 +1,8 @@
 export const Contacts = ({ contacts }) => {
+
     const listItems = contacts.map((contact) => {
-        return (< li key={contact.id}> {contact.name}</li>)
+        console.log(contact);
+        return (< li key={contact.id}>{contact.name}: {contact.number}</li>)
     })
 
     return (
