@@ -27,22 +27,24 @@ export class App extends Component {
     )
   }
   findName = e => {
-
+    console.log(this.state);
     this.setState(
       { [e.target.name]: e.target.value }
     )
 
   }
-  foundedName = (name, contacts) => {
-    const newContacts = contacts.filter(contact => {
+  // foundedName = (name, contacts) => {
+  //   const newContacts = contacts.filter(contact => {
 
-      if (contact.name.toLowerCase().replace(" ", '').includes(name)) {
-        return contact
-      }
-    })
+  //     if (contact.name.toLowerCase().replace(" ", '').includes(name)) {
+  //       return contact
+  //     }
 
-    return newContacts;
-  }
+
+
+  //   })
+  //   return newContacts;
+  // }
   render() {
     return (
       <div
