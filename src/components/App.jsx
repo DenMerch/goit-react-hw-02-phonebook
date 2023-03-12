@@ -27,7 +27,7 @@ export class App extends Component {
     )
   }
   findName = e => {
-    console.log(this.state);
+
     this.setState(
       { [e.target.name]: e.target.value }
     )
@@ -40,7 +40,7 @@ export class App extends Component {
         return contact
       }
     })
-    console.log(newContacts);
+
     return newContacts;
   }
   render() {
