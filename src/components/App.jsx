@@ -10,27 +10,44 @@ export class App extends Component {
     contacts: [],
     name: '',
     number: '',
+    filter: '',
   }
+
   handleSubmit = e => {
     e.preventDefault()
     const userId = nanoid()
     this.state.contacts.push({ id: userId, name: this.state.name, number: this.state.number });
-    console.log(this.state);
-    e.currentTarget.reset();
-    // this.setState({ [e.target.name.name]: "" });
+    this.setState({ name: '' });
+    this.setState({ number: '' });
   }
   handleInput = e => {
-    console.log({ [e.target.name]: e.target.value });
+
     this.setState(
       { [e.target.name]: e.target.value }
     )
+  }
+  findName = e => {
+    console.log(this.state);
+    this.setState(
+      { [e.target.name]: e.target.value }
+    )
+
+  }
+  foundedName = (name, contacts) => {
+    const newContacts = contacts.filter(contact => {
+
+      if (contact.name.toLowerCase().replace(" ", '').includes(name)) {
+        return contact
+      }
+    })
+    console.log(newContacts);
+    return newContacts;
   }
   render() {
     return (
       <div
         style={{
           flexDirection: "column",
-          height: '100vh',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -42,8 +59,14 @@ export class App extends Component {
         <FormFone handleSubmit={this.handleSubmit}
           handleInput={this.handleInput}
           name={this.state.name}
+          number={this.state.number}
         />
-        <Contacts contacts={this.state.contacts} />
+        <Contacts
+          findName={this.handleInput}
+          filter={this.state.filter}
+          newContact={this.foundedName(this.state.filter,
+            this.state.contacts)}
+        />
 
       </div>
     );
