@@ -1,4 +1,5 @@
 import { Component } from "react";
+import css from './Forms.module.css'
 const INITIAL_STATE = {
     name: '',
     number: '',
@@ -21,7 +22,7 @@ export class ContactForm extends Component {
     render() {
         return (
             <form onSubmit={this.handBtnSubmit}>
-                <div className="mb-3">
+                <div className={css.mb} >
                     <label htmlFor="name" className="form-label">Name</label>
                     <input
                         onChange={this.handleInput}
