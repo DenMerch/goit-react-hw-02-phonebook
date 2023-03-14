@@ -1,20 +1,22 @@
 import { Component } from "react";
-
+const INITIAL_STATE = {
+    name: '',
+    number: '',
+}
 export class ContactForm extends Component {
-    state = {
-        name: '',
-        number: '',
-    }
+    state = { ...INITIAL_STATE }
     handleInput = e => {
-
         this.setState(
             { [e.target.name]: e.target.value }
         )
     }
     handBtnSubmit = e => {
         e.preventDefault()
-        this.props.handleSubmit(e)
-        this.setState({ [e.target.name.name]: '', [e.target.number.name]: '' })
+        this.props.handleSubmit(this.state)
+        this.reset()
+    }
+    reset = () => {
+        this.setState({ ...INITIAL_STATE })
     }
     render() {
         return (

@@ -3,6 +3,7 @@ import { ContactForm } from "./Forms/FormsFone";
 import { nanoid } from 'nanoid'
 import { Filter } from "./Filter/Filter";
 import { Contacts } from "./Contacts/Contacts"
+import Notiflix from 'notiflix';
 export class App extends Component {
   state = {
     contacts: [{ id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -11,13 +12,16 @@ export class App extends Component {
     { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },],
     filter: '',
   }
-  handleSubmit = e => {
+  handleSubmit = ({ name, number }) => {
     const userId = nanoid()
-    console.log(this.state);
-    this.state.contacts.push({ id: userId, name: e.target.name.value, number: e.target.number.value });
+    const isNamePresent = this.state.contacts.filter(el => el.name === name)[0];
+    isNamePresent ? this.alert(name) :
+      this.setState(({ contacts }) => ({ contacts: [...contacts, { id: userId, name, number }] }))
+  };
+  alert = (name) => {
+    return Notiflix.Notify.failure(`${name} is alredy in contacts`)
   }
   handleInput = e => {
-
     this.setState(
       { [e.target.name]: e.target.value }
     )
@@ -26,10 +30,8 @@ export class App extends Component {
     this.setState(
       { [e.target.name]: e.target.value }
     )
-
   }
   foundedName = (name, contacts) => {
-
     return contacts.filter(contact => contact.name.toLowerCase().replace(" ", '').includes(name))
   }
   render() {
@@ -60,7 +62,6 @@ export class App extends Component {
       </div>
     );
   }
-
 };
 
 
