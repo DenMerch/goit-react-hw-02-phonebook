@@ -11,9 +11,12 @@ export class App extends Component {
   }
   handleSubmit = ({ name, number }) => {
     const userId = nanoid()
-    const isNamePresent = this.state.contacts.filter(el => el.name === name)[0];
-    isNamePresent ? this.alert(name) :
+    const isNamePresent = this.state.contacts.find(el => el.name === name);
+    if (isNamePresent) {
+      return this.alert(name)
+    } else {
       this.setState(({ contacts }) => ({ contacts: [...contacts, { id: userId, name, number }] }))
+    }
   };
   alert = (name) => {
     return Notiflix.Notify.failure(`${name} is alredy in contacts`)
@@ -24,11 +27,6 @@ export class App extends Component {
     }));
   };
   handleInput = e => {
-    this.setState(
-      { [e.target.name]: e.target.value }
-    )
-  }
-  findName = e => {
     this.setState(
       { [e.target.name]: e.target.value }
     )
